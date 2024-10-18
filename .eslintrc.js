@@ -9,8 +9,13 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
-    sourceType: 'module',
+    ecmaVersion: 2018, // or a more recent version
+    sourceType: 'module', // allow ES modules
+  },
+  settings: {
+    react: {
+      version: 'detect', // Automatically picks the version you have installed
+    },
   },
   plugins: ['react', 'jest'],
   rules: {

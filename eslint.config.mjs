@@ -1,14 +1,16 @@
+// .eslintrc.js or eslint.config.mjs
 import globals from 'globals'
 
 export default [
   {
-    files: ['**/*.js', '**/*.jsx'], // Include .jsx files if you're using React
+    files: ['**/*.js', '**/*.jsx'], // Include .jsx files
     languageOptions: {
-      sourceType: 'module', // Use 'module' for ES module syntax
+      sourceType: 'module',
       globals: {
-        ...globals.browser, // Use browser globals
-        ...globals.node, // Optionally add Node globals if needed
+        ...globals.browser,
+        ...globals.node,
       },
+      parser: 'babel-eslint', // Use Babel ESLint parser for JSX
     },
   },
 ]

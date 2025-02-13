@@ -25,3 +25,11 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: commit messages 1
+        env:
+          COMMIT_MESSAGES_1: ${{ join(toJson(github.event.commits.*.message)) }}
+        run: echo "$COMMIT_MESSAGES_1"
+      - name: commit messages 2
+        env:
+          COMMIT_MESSAGES_2: ${{ contains(join(toJson(github.event.commits.*.message), ', '), '#skip') }}
+        run: echo "$COMMIT_MESSAGES_2"

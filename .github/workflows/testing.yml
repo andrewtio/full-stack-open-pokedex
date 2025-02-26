@@ -48,4 +48,4 @@ jobs:
       - name: commit messages 6
         env:
           COMMIT_MESSAGES_6: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
-        run: echo "$COMMIT_MESSAGES_5"
+        run: echo "$COMMIT_MESSAGES_6"

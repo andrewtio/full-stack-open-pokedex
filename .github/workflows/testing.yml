@@ -29,7 +29,7 @@ jobs:
         env:
           COMMIT_MESSAGES_1: ${{ join(toJson(github.event.commits.*.message)) }}
         run: echo "$COMMIT_MESSAGES_1"
-      - name: commit messages 2 the right
+      - name: commit messages 2
         env:
           COMMIT_MESSAGES_2: ${{ contains(join(toJson(github.event.commits.*.message), ', '), '#skip') }}
         run: echo "$COMMIT_MESSAGES_2"
@@ -41,3 +41,11 @@ jobs:
         env:
           COMMIT_MESSAGES_4: ${{ (join(toJson(github.event.commits.*.message), ', ')) }}
         run: echo "$COMMIT_MESSAGES_4"
+      - name: commit messages 5
+        env:
+          COMMIT_MESSAGES_5: ${{ (join(github.event.commits.*.message)) }}
+        run: echo "$COMMIT_MESSAGES_5"
+      - name: commit messages 6
+        env:
+          COMMIT_MESSAGES_6: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
+        run: echo "$COMMIT_MESSAGES_5"

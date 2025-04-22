@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,7 +38,7 @@ jobs:
 
   tag_release:
     needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Bump version and push tag
@@ -49,7 +49,7 @@ jobs:
 
   build_notification_action:
     needs: [tag_release]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: build success notification
         uses: rjstone/discord-webhook-notify@v1

@@ -47,21 +47,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  build_notification_action:
+  build_notification:
     needs: [tag_release]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-22.04  
     steps:
-      - name: build success notification
+      - name: Notify success
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ success() }}
         with:
           severity: info
-          details: Test Succeeded!
+          details: A new version of Pokédex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: build failed notification
+      - name: Notify failure
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ failure() }}
         with:
           severity: error
-          details: Test Failed!
+          details: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

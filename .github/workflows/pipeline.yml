@@ -42,6 +42,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Bump version and push tag
+        if: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
         uses: anothrNick/github-tag-action@1.71.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build_notification_action:
+    needs: [tag_release]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: build success notification
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ success() }}
+        with:
+          severity: info
+          details: Test Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: build failed notification
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() }}
+        with:
+          severity: error
+          details: Test Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+

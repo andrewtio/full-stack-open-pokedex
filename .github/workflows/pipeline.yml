@@ -7,6 +7,7 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize]
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-22.04
@@ -50,6 +51,7 @@ jobs:
   build_notification:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-22.04  
+    if: always()
     steps:
       - name: Notify success
         uses: rjstone/discord-webhook-notify@v1.0.4

@@ -52,14 +52,14 @@ jobs:
     runs-on: ubuntu-22.04  
     steps:
       - name: Notify success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ success() }}
         with:
           severity: info
           details: A new version of Pokédex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Notify failure
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ failure() }}
         with:
           severity: error
